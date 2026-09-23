@@ -40,7 +40,7 @@ export const About: React.FC = () => {
               {/* Main Photo Card */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl bg-white border border-sky-100 z-10 flex flex-col">
                 <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" 
+                  src="face.jfif" 
                   alt="Priscillia NOUDOFININ" 
                   className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
                   loading="lazy"
