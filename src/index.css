@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: #0F172A;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Styles de base requis par la librairie page-flip (StPageFlip) —
+   sans eux, les faces des pages (notamment la couverture et la page
+   finale en "hard") ne se positionnent pas correctement et leur
+   contenu reste invisible. */
+.stf__parent {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  transform: translateZ(0);
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+}
+
+.stf__wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stf__parent canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.stf__block {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  perspective: 2000px;
+}
+
+.stf__item {
+  display: none;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.stf__outerShadow,
+.stf__innerShadow,
+.stf__hardShadow,
+.stf__hardInnerShadow {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* 3D Book & StPageFlip Custom Styles */
+.st-page-flip {
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.25), 0 8px 18px -6px rgba(74, 144, 226, 0.2);
+}
+
+.book-spine-shadow {
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.15) 0%, rgba(15, 23, 42, 0) 100%);
+}
+
+.book-page {
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  user-select: none;
+}
+
+.book-page-cover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #60a5fa 100%) !important;
+  color: #ffffff !important;
+}
+
+.book-page-final {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  color: #ffffff !important;
+}
+
+.book-page-content {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.book-page-visual {
+  background: #0b1329 !important;
+  color: #ffffff !important;
+}
+
+.book-page.--left {
+  border-right: 1px solid rgba(225, 239, 254, 0.8);
+}
+
+.book-page.--right {
+  border-left: 1px solid rgba(225, 239, 254, 0.8);
+}
+
+/* Glassmorphism subtle effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(225, 239, 254, 0.9);
+}
+
+/* Subtle pattern for hero */
+.grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(74, 144, 226, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(74, 144, 226, 0.05) 1px, transparent 1px);
+}
+
+/* Fond légèrement animé derrière le livre de certifications */
+@keyframes floatBlob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -25px) scale(1.08); }
+}
+
+@keyframes floatBlob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-35px, 20px) scale(1.05); }
+}
+
+@keyframes floatBlob3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 30px) scale(0.95); }
+}
+
+.animate-float-1 {
+  animation: floatBlob1 14s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatBlob2 18s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: floatBlob3 16s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-1,
+  .animate-float-2,
+  .animate-float-3 {
+    animation: none;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  header, footer, #main-content, #cv-close-btn, #cv-print-btn {
+    display: none !important;
+  }
+  #cv-modal-backdrop {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  #cv-modal-container {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Animated tech background */
+.tech-grid {
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(rgba(74, 144, 226, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 144, 226, 0.07) 1px, transparent 1px);
+  background-size: 45px 45px;
+  animation: gridMove 18s linear infinite;
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 45px 45px;
+  }
+}
+
+.tech-glow {
+  animation: glowFloat 7s ease-in-out infinite;
+}
+
+.tech-glow-delay {
+  animation: glowFloat 9s ease-in-out infinite reverse;
+}
+
+@keyframes glowFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(30px, -25px, 0) scale(1.08);
+  }
+}
+
+.tech-scan {
+  animation: scanMove 6s ease-in-out infinite;
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.5;
+  }
+
+  70% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-grid,
+  .tech-glow,
+  .tech-glow-delay,
+  .tech-scan {
+    animation: none;
+  }
+}
+
